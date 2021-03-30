@@ -13,6 +13,7 @@ jobs:
             echo $CIRCLE_TAG
             BRANCH_OR_TAG="${CIRCLE_TAG:-$CIRCLE_BRANCH}"
             echo $BRANCH_OR_TAG
+            echo "force"
 
 workflows:
   version: 2
