@@ -1,3 +1,10 @@
+# 1. Set your default branch to develop
+# 2. In circleci project settings->advanced set:
+#    - GitHub Status Updates (this should be on already)
+#    - Only build pull requests
+#    - Auto-cancel redundant builds
+#    - Free and Open Source (this should be on already)
+
 version: 2
 jobs:
   build:
@@ -12,8 +19,11 @@ jobs:
             echo $CIRCLE_BRANCH
             echo $CIRCLE_TAG
             BRANCH_OR_TAG="${CIRCLE_TAG:-$CIRCLE_BRANCH}"
-            echo $BRANCH_OR_TAG
-            echo "force"
+            if [ "$CIRCLE_TAG" = "$BRANCH_OR_TAG" ]; then
+              echo "I would push this as $BRANCH_OR_TAG"
+            else
+              echo "I am not a tag"
+            fi
 
 workflows:
   version: 2
