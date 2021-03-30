@@ -12,8 +12,11 @@ jobs:
             echo $CIRCLE_BRANCH
             echo $CIRCLE_TAG
             BRANCH_OR_TAG="${CIRCLE_TAG:-$CIRCLE_BRANCH}"
-            echo $BRANCH_OR_TAG
-            echo "force"
+            if [ "$CIRCLE_TAG" = "$BRANCH_OR_TAG" ]; then
+              echo "I would push this as $BRANCH_OR_TAG"
+            else
+              echo "I am not a tag"
+            fi
 
 workflows:
   version: 2
